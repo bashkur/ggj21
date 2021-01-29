@@ -61,10 +61,6 @@ Build/*/**
 # Don't ignore icon files in Build
 !Build/**/*.ico
 
-# Allow any files from /RawAssets dir.
-# Any file in /RawAssets dir will be managed by git lfs.
-!/RawAssets/**/*
-
 # Built data for maps
 *_BuiltData.uasset
 
