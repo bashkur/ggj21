@@ -98,6 +98,9 @@ void AGGJ21Character::SetupPlayerInputComponent(class UInputComponent* PlayerInp
 	PlayerInputComponent->BindAxis("TurnRate", this, &AGGJ21Character::TurnAtRate);
 	PlayerInputComponent->BindAxis("LookUp", this, &APawn::AddControllerPitchInput);
 	PlayerInputComponent->BindAxis("LookUpRate", this, &AGGJ21Character::LookUpAtRate);
+
+	// Bind hotbar item selection keys
+	PlayerInputComponent->BindAction("SelectTool", IE_Pressed, this, )
 }
 
 void AGGJ21Character::OnFire()

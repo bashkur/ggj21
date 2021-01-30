@@ -73,6 +73,8 @@ protected:
 	/** Fires a projectile. */
 	void OnFire();
 
+	void OnToolSelectionChange()
+
 	/** Handles moving forward/backward */
 	void MoveForward(float Val);
 
