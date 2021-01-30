@@ -11,6 +11,8 @@ class AGGJ21GameMode : public AGameModeBase
 {
 	GENERATED_BODY()
 
+	virtual void BeginPlay() override;
+
 public:
 	AGGJ21GameMode();
 };

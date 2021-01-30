@@ -5,6 +5,12 @@
 #include "GGJ21Character.h"
 #include "UObject/ConstructorHelpers.h"
 
+void AGGJ21GameMode::BeginPlay()
+{
+	Super::BeginPlay();
+
+}
+
 AGGJ21GameMode::AGGJ21GameMode()
 	: Super()
 {

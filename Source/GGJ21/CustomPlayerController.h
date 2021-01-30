@@ -20,13 +20,4 @@ class GGJ21_API ACustomPlayerController : public APlayerController
 	ACustomPlayerController();
 	
 	virtual void BeginPlay() override;
-
-	UPROPERTY(EditDefaultsOnly, Category="Custom Settings")
-	TSubclassOf<class UUserWidget> HUDWidgetType;
-
-	UPROPERTY(BlueprintReadWrite)
-	int CurrentTool;
-
-	protected:
-	UUserWidget* PlayerHUD;
 };

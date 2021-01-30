@@ -6,11 +6,10 @@
 #include "Camera/CameraComponent.h"
 #include "Components/CapsuleComponent.h"
 #include "Components/InputComponent.h"
-#include "GameFramework/InputSettings.h"
 #include "HeadMountedDisplayFunctionLibrary.h"
 #include "Kismet/GameplayStatics.h"
 #include "MotionControllerComponent.h"
-#include "XRMotionControllerBase.h" // for FXRMotionControllerBase::RightHandSourceId
+#include "Blueprint/UserWidget.h"
 
 DEFINE_LOG_CATEGORY_STATIC(LogFPChar, Warning, All);
 
@@ -67,7 +66,16 @@ void AGGJ21Character::BeginPlay()
 
 	Mesh1P->SetHiddenInGame(false, true);
 
-	ActiveTool = 0.f;
+	if (HUDWidgetType)
+	{
+		MasterHUD = CreateWidget(GetWorld()->GetFirstPlayerController(), HUDWidgetType);
+		if (MasterHUD)
+		{
+			MasterHUD->AddToViewport();
+			ActiveTool = 0.f;
+			V_LOG("Created Master HUD");
+		}
+	}
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -119,7 +127,7 @@ void AGGJ21Character::NextTool()
 	// V_LOGNAME("New tool is ", Tools[ActiveTool%4]);
 	int cur = FMath::Abs(ActiveTool % 4);
 	V_LOGI("Nxt tool! active tool = ", cur);
-	
+	UpdateActiveTool(cur);
 }
 
 void AGGJ21Character::PreviousTool()
@@ -135,7 +143,8 @@ void AGGJ21Character::PreviousTool()
 	}
 	// V_LOGNAME("New tool is ", Tools[ActiveTool%4]);
 	int cur = FMath::Abs(ActiveTool % 4);
-	V_LOGI("Prev tool! active tool = ", cur);
+	V_LOGI("Prev tool! active tool = ", cur)
+	UpdateActiveTool(cur);
 }
 
 void AGGJ21Character::UseTool()
