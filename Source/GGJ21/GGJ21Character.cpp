@@ -100,7 +100,7 @@ void AGGJ21Character::SetupPlayerInputComponent(class UInputComponent* PlayerInp
 	PlayerInputComponent->BindAxis("LookUpRate", this, &AGGJ21Character::LookUpAtRate);
 
 	// Bind hotbar item selection keys
-	PlayerInputComponent->BindAction("SelectTool", IE_Pressed, this, )
+	PlayerInputComponent->BindAction("SelectTool", IE_Pressed, this, &AGGJ21Character::OnToolSelectionChange);
 }
 
 void AGGJ21Character::OnFire()
@@ -140,6 +140,10 @@ void AGGJ21Character::OnFire()
 			AnimInstance->Montage_Play(FireAnimation, 1.f);
 		}
 	}
+}
+
+void AGGJ21Character::OnToolSelectionChange()
+{
 }
 
 void AGGJ21Character::MoveForward(float Value)
