@@ -2,6 +2,7 @@
 
 #pragma once
 
+#include "BaseToolComponent.h"
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "GGJ21Character.generated.h"
@@ -13,6 +14,13 @@ class AGGJ21Character : public ACharacter
 {
 	GENERATED_BODY()
 
+	//Active Tool
+	float ActiveTool;
+
+	//List of Available Tools
+	UPROPERTY(EditAnywhere, Category = Tools)
+	TArray<UBaseToolComponent*> Tools;
+	
 	/** Pawn mesh: 1st person view (arms; seen only by self) */
 	UPROPERTY(VisibleDefaultsOnly, Category=Mesh)
 	class USkeletalMeshComponent* Mesh1P;
@@ -44,6 +52,7 @@ protected:
 	virtual void BeginPlay();
 
 public:
+	
 	/** Base turn rate, in deg/sec. Other scaling may affect final turn rate. */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category=Camera)
 	float BaseTurnRate;
@@ -69,6 +78,15 @@ public:
 	class UAnimMontage* FireAnimation;
 
 protected:
+
+	//Get next tool
+	void NextTool();
+
+	//Get next tool
+	void PreviousTool();
+
+	//Use the active tool
+	void UseTool();
 	
 	/** Fires a projectile. */
 	void OnFire();

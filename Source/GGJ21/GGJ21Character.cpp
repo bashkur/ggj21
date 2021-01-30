@@ -105,6 +105,37 @@ void AGGJ21Character::SetupPlayerInputComponent(class UInputComponent* PlayerInp
 	PlayerInputComponent->BindAction("SelectTool", IE_Pressed, this, &AGGJ21Character::OnToolSelectionChange);
 }
 
+void AGGJ21Character::NextTool()
+{
+	if(ActiveTool >= Tools.Num()-1)
+	{
+		ActiveTool = 0;
+	}
+	else
+	{
+		ActiveTool++;	
+	}
+	V_LOGNAME("New tool is ", Tools[ActiveTool]);
+}
+
+void AGGJ21Character::PreviousTool()
+{
+	if(ActiveTool <= 0)
+	{
+		ActiveTool = Tools.Num() - 1;
+	}
+	else
+	{
+		ActiveTool--;	
+	}
+	V_LOGNAME("New tool is ", Tools[ActiveTool]);
+}
+
+void AGGJ21Character::UseTool()
+{
+	Tools[ActiveTool]->Use();
+}
+
 void AGGJ21Character::OnFire()
 {
 	// try and fire a projectile
