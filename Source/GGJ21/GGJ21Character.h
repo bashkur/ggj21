@@ -44,7 +44,6 @@ protected:
 	virtual void BeginPlay();
 
 public:
-	
 	/** Base turn rate, in deg/sec. Other scaling may affect final turn rate. */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category=Camera)
 	float BaseTurnRate;
@@ -69,6 +68,12 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Gameplay)
 	class UAnimMontage* FireAnimation;
 
+	UPROPERTY(EditDefaultsOnly, Category=UI)
+	TSubclassOf<class UUserWidget> HUDWidgetType;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=UI)
+	UUserWidget* MasterHUD;
+
 protected:
 
 	//Get next tool
@@ -83,10 +88,12 @@ protected:
 	/** Fires a projectile. */
 	void OnFire();
 
-	/** Resets HMD orientation and position in VR. */
-	// void OnResetVR();
+	// Call this function when the active tool changes. Implemented in Character BP.
+	UFUNCTION(BlueprintImplementableEvent, Category = "Custom Events")
+	void UpdateActiveTool(int CurrentToolIdx);
+
 	//Sets the map visible or not
-	UFUNCTION(BlueprintNativeEvent, Category="Toggling Map")
+	UFUNCTION(BlueprintNativeEvent, Category="Custom Events")
 	void ToggleMap();
 	virtual void ToggleMap_Implementation(){}
 
