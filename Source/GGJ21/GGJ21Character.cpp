@@ -10,6 +10,10 @@
 #include "Kismet/GameplayStatics.h"
 #include "MotionControllerComponent.h"
 #include "Blueprint/UserWidget.h"
+#include "ShovelTool.h"
+#include "DetectorTool.h"
+#include "MapTool.h"
+#include "DowsingTool.h"
 
 DEFINE_LOG_CATEGORY_STATIC(LogFPChar, Warning, All);
 
@@ -54,6 +58,20 @@ AGGJ21Character::AGGJ21Character()
 
 	// Default offset from the character location for projectiles to spawn
 	GunOffset = FVector(100.0f, 0.0f, 10.0f);
+
+	//Adding tool components
+	UBaseToolComponent* mapTool = CreateDefaultSubobject<UMapTool>("MapTool");
+	AddOwnedComponent(mapTool);
+	Tools.Add(mapTool);
+	UBaseToolComponent* dowsingTool = CreateDefaultSubobject<UDowsingTool>("DowsingTool");
+	AddOwnedComponent(dowsingTool);
+	Tools.Add(dowsingTool);
+	UBaseToolComponent* detectorTool = CreateDefaultSubobject<UDetectorTool>("DetectorTool");
+	AddOwnedComponent(detectorTool);
+	Tools.Add(detectorTool);
+	UBaseToolComponent* shovelTool = CreateDefaultSubobject<UShovelTool>("ShovelTool");
+	AddOwnedComponent(shovelTool);
+	Tools.Add(shovelTool);
 }
 
 void AGGJ21Character::BeginPlay()
@@ -93,7 +111,7 @@ void AGGJ21Character::SetupPlayerInputComponent(class UInputComponent* PlayerInp
 	//Bind for toggling map
 	PlayerInputComponent->BindAction("ViewMap", IE_Pressed,this,&AGGJ21Character::ToggleMap);
 	// Bind fire event
-	PlayerInputComponent->BindAction("Fire", IE_Pressed, this, &AGGJ21Character::OnFire);
+	PlayerInputComponent->BindAction("Fire", IE_Pressed, this, &AGGJ21Character::UseTool);
 
 
 	// Bind movement events

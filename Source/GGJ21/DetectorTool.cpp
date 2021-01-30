@@ -15,5 +15,5 @@ void UDetectorTool::TickComponent(float DeltaTime, ELevelTick TickType, FActorCo
 
 void UDetectorTool::Use()
 {
-	
+	V_LOG("Using Detector Tool!");
 }

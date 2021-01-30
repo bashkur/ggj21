@@ -15,4 +15,5 @@ void UDowsingTool::TickComponent(float DeltaTime, ELevelTick TickType, FActorCom
 
 void UDowsingTool::Use()
 {
+	V_LOG("Using Dowsing Tool!");
 }

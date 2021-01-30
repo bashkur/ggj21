@@ -15,4 +15,5 @@ void UShovelTool::TickComponent(float DeltaTime, ELevelTick TickType, FActorComp
 
 void UShovelTool::Use()
 {
+	V_LOG("Using Shovel Tool!");
 }
