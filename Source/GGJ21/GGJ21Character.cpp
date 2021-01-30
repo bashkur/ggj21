@@ -55,9 +55,6 @@ AGGJ21Character::AGGJ21Character()
 
 	// Default offset from the character location for projectiles to spawn
 	GunOffset = FVector(100.0f, 0.0f, 10.0f);
-
-	// Note: The ProjectileClass and the skeletal mesh/anim blueprints for Mesh1P, FP_Gun, and VR_Gun 
-	// are set in the derived blueprint asset named MyCharacter to avoid direct content references in C++.
 }
 
 void AGGJ21Character::BeginPlay()
@@ -69,6 +66,8 @@ void AGGJ21Character::BeginPlay()
 	FP_Gun->AttachToComponent(Mesh1P, FAttachmentTransformRules(EAttachmentRule::SnapToTarget, true), TEXT("GripPoint"));
 
 	Mesh1P->SetHiddenInGame(false, true);
+
+	ActiveTool = 0.f;
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -102,33 +101,41 @@ void AGGJ21Character::SetupPlayerInputComponent(class UInputComponent* PlayerInp
 	PlayerInputComponent->BindAxis("LookUpRate", this, &AGGJ21Character::LookUpAtRate);
 
 	// Bind hotbar item selection keys
-	PlayerInputComponent->BindAction("SelectTool", IE_Pressed, this, &AGGJ21Character::OnToolSelectionChange);
+	PlayerInputComponent->BindAction("NextTool", IE_Pressed, this, &AGGJ21Character::NextTool);
+	PlayerInputComponent->BindAction("PreviousTool", IE_Pressed, this, &AGGJ21Character::PreviousTool);
 }
 
 void AGGJ21Character::NextTool()
 {
-	if(ActiveTool >= Tools.Num()-1)
+	// if(ActiveTool >= Tools.Num()-1)
+	if(ActiveTool >= 3)						// TODO: temp fix. Change to list based number.
 	{
 		ActiveTool = 0;
 	}
 	else
 	{
-		ActiveTool++;	
+		ActiveTool++;
 	}
-	V_LOGNAME("New tool is ", Tools[ActiveTool]);
+	// V_LOGNAME("New tool is ", Tools[ActiveTool%4]);
+	int cur = FMath::Abs(ActiveTool % 4);
+	V_LOGI("Nxt tool! active tool = ", cur);
+	
 }
 
 void AGGJ21Character::PreviousTool()
 {
 	if(ActiveTool <= 0)
 	{
-		ActiveTool = Tools.Num() - 1;
+		// ActiveTool = Tools.Num() - 1;
+		ActiveTool = 3;				// TODO: temp fix. Change to list based number.
 	}
 	else
 	{
-		ActiveTool--;	
+		ActiveTool--;
 	}
-	V_LOGNAME("New tool is ", Tools[ActiveTool]);
+	// V_LOGNAME("New tool is ", Tools[ActiveTool%4]);
+	int cur = FMath::Abs(ActiveTool % 4);
+	V_LOGI("Prev tool! active tool = ", cur);
 }
 
 void AGGJ21Character::UseTool()
@@ -175,9 +182,6 @@ void AGGJ21Character::OnFire()
 	}
 }
 
-void AGGJ21Character::OnToolSelectionChange()
-{
-}
 
 void AGGJ21Character::MoveForward(float Value)
 {

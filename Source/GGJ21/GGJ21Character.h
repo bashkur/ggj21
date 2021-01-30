@@ -15,7 +15,7 @@ class AGGJ21Character : public ACharacter
 	GENERATED_BODY()
 
 	//Active Tool
-	float ActiveTool;
+	int ActiveTool;
 
 	//List of Available Tools
 	UPROPERTY(EditAnywhere, Category = Tools)
@@ -32,14 +32,6 @@ class AGGJ21Character : public ACharacter
 	/** Location on gun mesh where projectiles should spawn. */
 	UPROPERTY(VisibleDefaultsOnly, Category = Mesh)
 	class USceneComponent* FP_MuzzleLocation;
-
-	/** Gun mesh: VR view (attached to the VR controller directly, no arm, just the actual gun) */
-	UPROPERTY(VisibleDefaultsOnly, Category = Mesh)
-	class USkeletalMeshComponent* VR_Gun;
-
-	/** Location on VR gun mesh where projectiles should spawn. */
-	UPROPERTY(VisibleDefaultsOnly, Category = Mesh)
-	class USceneComponent* VR_MuzzleLocation;
 
 	/** First person camera */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
@@ -97,7 +89,6 @@ protected:
 	UFUNCTION(BlueprintNativeEvent, Category="Toggling Map")
 	void ToggleMap();
 	virtual void ToggleMap_Implementation(){}
-	void OnToolSelectionChange();
 
 	/** Handles moving forward/backward */
 	void MoveForward(float Val);
