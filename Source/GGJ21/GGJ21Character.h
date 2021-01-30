@@ -87,6 +87,10 @@ protected:
 
 	/** Resets HMD orientation and position in VR. */
 	// void OnResetVR();
+	//Sets the map visible or not
+	UFUNCTION(BlueprintNativeEvent, Category="Toggling Map")
+	void ToggleMap();
+	virtual void ToggleMap_Implementation(){}
 
 	/** Handles moving forward/backward */
 	void MoveForward(float Val);

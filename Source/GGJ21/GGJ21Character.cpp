@@ -117,6 +117,8 @@ void AGGJ21Character::SetupPlayerInputComponent(class UInputComponent* PlayerInp
 	PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &ACharacter::Jump);
 	PlayerInputComponent->BindAction("Jump", IE_Released, this, &ACharacter::StopJumping);
 
+	//Bind for toggling map
+	PlayerInputComponent->BindAction("ViewMap", IE_Pressed,this,&AGGJ21Character::ToggleMap);
 	// Bind fire event
 	PlayerInputComponent->BindAction("Fire", IE_Pressed, this, &AGGJ21Character::OnFire);
 
@@ -283,6 +285,7 @@ void AGGJ21Character::LookUpAtRate(float Rate)
 	// calculate delta for this frame from the rate information
 	AddControllerPitchInput(Rate * BaseLookUpRate * GetWorld()->GetDeltaSeconds());
 }
+
 
 // bool AGGJ21Character::EnableTouchscreenMovement(class UInputComponent* PlayerInputComponent)
 // {
