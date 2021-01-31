@@ -42,7 +42,7 @@ protected:
 	virtual void BeginPlay();
 
 public:
-	//Active Tool
+	//Active Tool Number -> 0 = map, 1 = pickup, 2 = detector, 3 = shovel
 	UPROPERTY(BlueprintReadOnly)
 	int ActiveTool;
 	
