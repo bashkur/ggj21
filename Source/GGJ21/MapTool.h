@@ -9,7 +9,7 @@
 /**
  * 
  */
-UCLASS()
+UCLASS(Blueprintable)
 class GGJ21_API UMapTool : public UBaseToolComponent
 {
 	GENERATED_BODY()

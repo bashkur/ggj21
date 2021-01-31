@@ -16,10 +16,6 @@ class AGGJ21Character : public ACharacter
 
 	//Active Tool
 	int ActiveTool;
-
-	//List of Available Tools
-	UPROPERTY(EditAnywhere, Category = Tools)
-	TArray<UBaseToolComponent*> Tools;
 	
 	/** Pawn mesh: 1st person view (arms; seen only by self) */
 	UPROPERTY(VisibleDefaultsOnly, Category=Mesh)
@@ -44,6 +40,14 @@ protected:
 	virtual void BeginPlay();
 
 public:
+	//List of Available Tools
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Tools)
+	TArray<TSubclassOf<class UActorComponent>> ToolTypes;
+
+	//List of Available Tools
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Tools)
+	TArray<UBaseToolComponent*> Tools;
+	
 	/** Base turn rate, in deg/sec. Other scaling may affect final turn rate. */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category=Camera)
 	float BaseTurnRate;

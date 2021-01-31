@@ -59,19 +59,8 @@ AGGJ21Character::AGGJ21Character()
 	// Default offset from the character location for projectiles to spawn
 	GunOffset = FVector(100.0f, 0.0f, 10.0f);
 
-	//Adding tool components
-	UBaseToolComponent* mapTool = CreateDefaultSubobject<UMapTool>("MapTool");
-	AddOwnedComponent(mapTool);
-	Tools.Add(mapTool);
-	UBaseToolComponent* dowsingTool = CreateDefaultSubobject<UDowsingTool>("DowsingTool");
-	AddOwnedComponent(dowsingTool);
-	Tools.Add(dowsingTool);
-	UBaseToolComponent* detectorTool = CreateDefaultSubobject<UDetectorTool>("DetectorTool");
-	AddOwnedComponent(detectorTool);
-	Tools.Add(detectorTool);
-	UBaseToolComponent* shovelTool = CreateDefaultSubobject<UShovelTool>("ShovelTool");
-	AddOwnedComponent(shovelTool);
-	Tools.Add(shovelTool);
+	ActiveTool = 0;
+	
 }
 
 void AGGJ21Character::BeginPlay()
@@ -93,6 +82,12 @@ void AGGJ21Character::BeginPlay()
 			ActiveTool = 0.f;
 			V_LOG("Created Master HUD");
 		}
+	}
+
+	Tools.Empty();
+	for(int i=0; i<ToolTypes.Num(); i++)
+	{
+		Tools.Add(Cast<UBaseToolComponent>(FindComponentByClass(ToolTypes[i])));
 	}
 }
 
@@ -167,7 +162,11 @@ void AGGJ21Character::PreviousTool()
 
 void AGGJ21Character::UseTool()
 {
-	Tools[ActiveTool]->Use();
+	UBaseToolComponent* Tool = Cast<UBaseToolComponent>(Tools[ActiveTool]);
+	if(IsValid(Tool))
+	{
+		Tool->Use();
+	}
 }
 
 void AGGJ21Character::OnFire()

@@ -8,7 +8,7 @@
 #include "BaseToolComponent.generated.h"
 
 
-UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
+UCLASS( Blueprintable, ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class GGJ21_API UBaseToolComponent : public UActorComponent
 {
 	GENERATED_BODY()

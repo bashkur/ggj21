@@ -9,7 +9,7 @@
 /**
  * 
  */
-UCLASS()
+UCLASS(Blueprintable)
 class GGJ21_API UDowsingTool : public UBaseToolComponent
 {
 	GENERATED_BODY()
