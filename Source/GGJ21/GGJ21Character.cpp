@@ -103,8 +103,6 @@ void AGGJ21Character::SetupPlayerInputComponent(class UInputComponent* PlayerInp
 	PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &ACharacter::Jump);
 	PlayerInputComponent->BindAction("Jump", IE_Released, this, &ACharacter::StopJumping);
 
-	//Bind for toggling map
-	PlayerInputComponent->BindAction("ViewMap", IE_Pressed,this,&AGGJ21Character::ToggleMap);
 	// Bind fire event
 	PlayerInputComponent->BindAction("Fire", IE_Pressed, this, &AGGJ21Character::UseTool);
 

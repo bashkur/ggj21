@@ -24,4 +24,9 @@ class GGJ21_API UMapTool : public UBaseToolComponent
 
 	// Called to use the tool's primary function
 	virtual void Use() override;
+
+	//Sets the map visible or not
+	UFUNCTION(BlueprintNativeEvent, Category="Custom Events")
+    void ToggleMap();
+	virtual void ToggleMap_Implementation();
 };

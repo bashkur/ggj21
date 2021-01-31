@@ -97,11 +97,6 @@ protected:
 	UFUNCTION(BlueprintImplementableEvent, Category = "Custom Events")
 	void UpdateActiveTool(int CurrentToolIdx);
 
-	//Sets the map visible or not
-	UFUNCTION(BlueprintNativeEvent, Category="Custom Events")
-	void ToggleMap();
-	virtual void ToggleMap_Implementation(){}
-
 	/** Handles moving forward/backward */
 	void MoveForward(float Val);
 

@@ -16,4 +16,11 @@ void UMapTool::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompone
 void UMapTool::Use()
 {
 	V_LOG("Using Map Tool!");
+	ToggleMap();
 }
+
+void UMapTool::ToggleMap_Implementation()
+{
+	V_LOG("Map");
+}
+
