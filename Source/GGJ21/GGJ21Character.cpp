@@ -127,7 +127,7 @@ void AGGJ21Character::SetupPlayerInputComponent(class UInputComponent* PlayerInp
 void AGGJ21Character::NextTool()
 {
 	// if(ActiveTool >= Tools.Num()-1)
-	if(ActiveTool >= 3)						// TODO: temp fix. Change to list based number.
+	if(ActiveTool >= 1)						// TODO: temp fix. Change to list based number.
 	{
 		ActiveTool = 0;
 	}
@@ -136,7 +136,7 @@ void AGGJ21Character::NextTool()
 		ActiveTool++;
 	}
 	// V_LOGNAME("New tool is ", Tools[ActiveTool%4]);
-	int cur = FMath::Abs(ActiveTool % 4);
+	int cur = FMath::Abs(ActiveTool % 2);
 	V_LOGI("Nxt tool! active tool = ", cur);
 	UpdateActiveTool(cur);
 }
@@ -146,14 +146,14 @@ void AGGJ21Character::PreviousTool()
 	if(ActiveTool <= 0)
 	{
 		// ActiveTool = Tools.Num() - 1;
-		ActiveTool = 3;				// TODO: temp fix. Change to list based number.
+		ActiveTool = 1;				// TODO: temp fix. Change to list based number.
 	}
 	else
 	{
 		ActiveTool--;
 	}
 	// V_LOGNAME("New tool is ", Tools[ActiveTool%4]);
-	int cur = FMath::Abs(ActiveTool % 4);
+	int cur = FMath::Abs(ActiveTool % 2);
 	V_LOGI("Prev tool! active tool = ", cur)
 	UpdateActiveTool(cur);
 }
