@@ -60,7 +60,9 @@ AGGJ21Character::AGGJ21Character()
 	GunOffset = FVector(100.0f, 0.0f, 10.0f);
 
 	ActiveTool = 0;
-	
+
+	Inventory = CreateDefaultSubobject<UTreasureInventoryComponent>("Inventory");
+	AddOwnedComponent(Inventory);
 }
 
 void AGGJ21Character::BeginPlay()

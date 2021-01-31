@@ -5,6 +5,7 @@
 #include "BaseToolComponent.h"
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
+#include "TreasureInventoryComponent.h"
 #include "GGJ21Character.generated.h"
 
 class UInputComponent;
@@ -13,9 +14,6 @@ UCLASS(config=Game)
 class AGGJ21Character : public ACharacter
 {
 	GENERATED_BODY()
-
-	//Active Tool
-	int ActiveTool;
 	
 	/** Pawn mesh: 1st person view (arms; seen only by self) */
 	UPROPERTY(VisibleDefaultsOnly, Category=Mesh)
@@ -33,6 +31,10 @@ class AGGJ21Character : public ACharacter
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
 	class UCameraComponent* FirstPersonCameraComponent;
 
+	/** Treasure Inventory */
+    UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Treasure, meta = (AllowPrivateAccess = "true"))
+	class UTreasureInventoryComponent* Inventory;
+
 public:
 	AGGJ21Character();
 
@@ -40,7 +42,11 @@ protected:
 	virtual void BeginPlay();
 
 public:
-	//List of Available Tools
+	//Active Tool
+	UPROPERTY(BlueprintReadOnly)
+	int ActiveTool;
+	
+	//List of Available Tool Types to be set in BP
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Tools)
 	TArray<TSubclassOf<class UActorComponent>> ToolTypes;
 
