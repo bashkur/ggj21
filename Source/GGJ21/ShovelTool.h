@@ -9,7 +9,7 @@
 /**
  * 
  */
-UCLASS()
+UCLASS(Blueprintable)
 class GGJ21_API UShovelTool : public UBaseToolComponent
 {
 	GENERATED_BODY()
@@ -24,4 +24,8 @@ class GGJ21_API UShovelTool : public UBaseToolComponent
 
 	// Called to use the tool's primary function
 	virtual void Use() override;
+
+	// Blueprint function to dig dirt
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	void Dig();
 };

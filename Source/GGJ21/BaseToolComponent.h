@@ -26,6 +26,7 @@ public:
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
 	// Called to use the tool's primary function
+	UFUNCTION(BlueprintCallable)
 	virtual void Use();
 	
 };
